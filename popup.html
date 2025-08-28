@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Context Flow</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <div class="header">
+        <div class="logo">
+            <span class="icon">🌊</span>
+            <span class="title">Context Flow</span>
+        </div>
+        <div class="quick-actions">
+            <button id="deleteWorkspaceBtn" class="icon-btn danger" title="Delete Workspace">🗑️</button>
+            <button id="settingsBtn" class="icon-btn" title="Settings">⚙️</button>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="section">
+            <div class="section-header">
+                <span class="section-title">Current Workspace</span>
+                <span id="workspaceIndicator" class="workspace-indicator"></span>
+            </div>
+            <div class="workspace-selector">
+                <select id="workspaceDropdown">
+                    <option value="">Loading...</option>
+                </select>
+                <button id="newWorkspaceBtn" class="btn-primary">+ New</button>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">
+                <span class="section-title">Tabs</span>
+                <span id="tabCount" class="count-badge">0</span>
+            </div>
+            <div id="tabsList" class="tabs-list">
+                <div class="empty-state">No tabs in this workspace yet</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">
+                <span class="section-title">Notes</span>
+                <button id="saveNotesBtn" class="save-indicator" style="display: none;">💾</button>
+            </div>
+            <textarea 
+                id="notesArea" 
+                placeholder="Quick notes for this workspace..."
+                rows="4"
+            ></textarea>
+        </div>
+
+        <div class="section">
+            <div class="quick-buttons">
+                <button id="openAllTabsBtn" class="btn-secondary">📂 Open All Tabs</button>
+                <button id="clearWorkspaceBtn" class="btn-danger">🗑️ Clear Tabs</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="newWorkspaceModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Create New Workspace</h3>
+                <button id="closeModalBtn" class="close-btn">×</button>
+            </div>
+            <div class="modal-body">
+                <input 
+                    type="text" 
+                    id="workspaceNameInput" 
+                    placeholder="Workspace name..."
+                    maxlength="50"
+                >
+                <select id="contextSelect">
+                    <option value="general">📁 General</option>
+                    <option value="work">💼 Work</option>
+                    <option value="shopping">🛒 Shopping</option>
+                    <option value="research">📚 Research</option>
+                    <option value="travel">✈️ Travel</option>
+                    <option value="entertainment">🎬 Entertainment</option>
+                </select>
+                <div class="modal-actions">
+                    <button id="cancelBtn" class="btn-secondary">Cancel</button>
+                    <button id="createBtn" class="btn-primary">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="confirmModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="confirmTitle">Confirm Action</h3>
+                <button id="confirmCloseBtn" class="close-btn">×</button>
+            </div>
+            <div class="modal-body">
+                <p id="confirmMessage">Are you sure?</p>
+                <div class="modal-actions">
+                    <button id="confirmCancelBtn" class="btn-secondary">Cancel</button>
+                    <button id="confirmOkBtn" class="btn-danger">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="settingsPanel" class="settings-panel">
+        <div class="settings-header">
+            <h3>Settings</h3>
+            <button id="closeSettingsBtn" class="close-btn">×</button>
+        </div>
+        <div class="settings-content">
+            <label class="setting-item">
+                <input type="checkbox" id="autoDetectionToggle">
+                <span>Auto-detect context</span>
+            </label>
+            <label class="setting-item">
+                <input type="checkbox" id="smartSuggestionsToggle">
+                <span>Smart suggestions</span>
+            </label>
+            <div class="setting-item">
+                <label>Max tabs per workspace:</label>
+                <input type="number" id="maxTabsInput" min="5" max="50" value="20">
+            </div>
+        </div>
+    </div>
+
+    <div id="errorToast" class="error-toast"></div>
+
+    <script src="popup.js"></script>
+</body>
+</html>
